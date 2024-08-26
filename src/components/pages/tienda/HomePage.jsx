@@ -166,7 +166,6 @@ const HomePage = () => {
         <p className='text-xl text-gray-700 mb-6 text-center'>Imagenes de la tienda Bubba donde encontraras los mejores tés</p>
         <CardImage images={imagesCard} />
       </section>
-
       </HomeLayout>
     </>
   )

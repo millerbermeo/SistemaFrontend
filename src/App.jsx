@@ -1,13 +1,16 @@
 import React from 'react'
 import AppRoutes from './components/routes/AppRoutes'
-import {NextUIProvider} from "@nextui-org/react";
+import { NextUIProvider } from "@nextui-org/react";
+import { ChakraProvider } from '@chakra-ui/react';
 
 
 
 const App = () => {
   return (
     <NextUIProvider>
-    <AppRoutes />
+      <ChakraProvider>
+        <AppRoutes />
+      </ChakraProvider>
     </NextUIProvider>
   )
 }

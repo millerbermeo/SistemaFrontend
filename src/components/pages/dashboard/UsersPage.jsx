@@ -9,9 +9,9 @@ const UsersPage = () => {
 
   const { data: usersData, loading } = useFetchData("/dynamic/Role");
 
-  if (loading) return <p>Loading...</p>;
+  // if (loading) return <p>Loading...</p>;
 
-  console.log(usersData);
+  // console.log(usersData);
   const columns = ["CODIGO", "NOMBRE", "CODIGO", "NOMBRE"];
   return (
     <MainLayout>

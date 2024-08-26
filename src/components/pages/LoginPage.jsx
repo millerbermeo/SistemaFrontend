@@ -1,8 +1,9 @@
 import React from 'react'
+import LoginTemplate from '../templates/LoginTemplate'
 
 const LoginPage = () => {
   return (
-    <div>LoginPage</div>
+    <LoginTemplate />
   )
 }
 
