@@ -5,24 +5,20 @@ import ButtonLogin from '../molecules/ButtonLogin';
 import { Divider } from "@nextui-org/react";
 import { ButtonGoogle } from '../atoms/ButtonGoogle';
 import { ButtonFacebook } from '../atoms/ButtonFacebook';
-import useLogin from '../../hooks/useLogin';
 import ToastComponent from './ToastComponent';
-import useNavigation from '../../utils/useNavigation';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { goTo } = useNavigation();
+    const { login, loading, toastInfo } = useAuth();
 
-    const { iniciarSession, loading, error, toastInfo } = useLogin();
+
 
     const handleLogin = async () => {
-        try {
-            await iniciarSession({ email, password });
-            goTo('/dashboard');
-        } catch (err) {
-            console.error('Login failed:', err);
-        }
+       
+            await login({ email, password });
+     
     };
 
     return (
@@ -30,8 +26,8 @@ const Login = () => {
             <div className='w-full max-w-md p-6 bg-white rounded-lg shadow-lg'>
                 <h1 className='text-4xl font-bold text-center mb-6'>Sign In</h1>
                 <div className='space-y-6'>
-                    <InputUsername email={email} setEmail={setEmail} />  {/* Pasar props */}
-                    <InputPassword password={password} setPassword={setPassword} />  {/* Pasar props */}
+                    <InputUsername email={email} setEmail={setEmail} />
+                    <InputPassword password={password} setPassword={setPassword} />
                     <ButtonLogin handleLogin={handleLogin} isLoading={loading} />
                     <Divider className="my-4" />
                     <div className='text-center'>
@@ -44,14 +40,16 @@ const Login = () => {
                 </div>
             </div>
 
-            <ToastComponent
-                title={toastInfo.title}
-                description={toastInfo.description}
-                status={toastInfo.status}
-                trigger={toastInfo.trigger}
-            />
+            {toastInfo.title && toastInfo.description && (
+                <ToastComponent
+                    title={toastInfo.title}
+                    description={toastInfo.description}
+                    status={toastInfo.status}
+                    trigger={toastInfo.trigger}
+                />
+            )}
         </div>
     );
 };
 
-export default Login
+export default Login;
