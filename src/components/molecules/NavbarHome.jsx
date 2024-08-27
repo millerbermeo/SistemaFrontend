@@ -1,6 +1,9 @@
 import React from 'react';
+import useNavigation from '../../utils/useNavigation';
 
 const NavbarHome = () => {
+
+  const { goTo } = useNavigation();
   return (
     <nav className="bg-white w-[80%] left-1/2 transform -translate-x-1/2 fixed top-4 2xl:top-6 py-2.5 rounded-full shadow-md z-50">
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
@@ -32,7 +35,7 @@ const NavbarHome = () => {
           <button className="bg-blue-700 text-white py-1 px-4 rounded-full hover:bg-blue-800 transition">
             Regístrate ahora
           </button>
-          <button className="bg-gray-100 text-gray-700 py-1 px-4 rounded-full hover:bg-gray-200 transition flex items-center space-x-1">
+          <button onClick={()=>goTo('/login')} className="bg-gray-100 text-gray-700 py-1 px-4 rounded-full hover:bg-gray-200 transition flex items-center space-x-1">
             <span>Ingresar</span>
             <span>▼</span>
           </button>

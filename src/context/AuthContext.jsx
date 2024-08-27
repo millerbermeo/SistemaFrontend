@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
+import Cookies from 'js-cookie';
 import axiosClient from '../services/axiosClient';
 import useNavigation from '../utils/useNavigation';
 
@@ -8,6 +9,8 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+    const [roles, setRoles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [toastInfo, setToastInfo] = useState({ status: '', title: '', description: '' });
@@ -15,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (data) => {
         setLoading(true);
-        setToastInfo('')
+        setToastInfo('');
         const formData = new FormData();
         formData.append('email', data.email);
         formData.append('password', data.password);
@@ -27,13 +30,41 @@ export const AuthProvider = ({ children }) => {
                 }
             });
 
-            console.log("auth",response.data);
-
             setLoading(false);
 
-            const { token, user } = response.data;
+            const { access_token, user: userData } = response.data.data;
 
-            setUser(user);
+            if (response.data.data) {
+                // Almacenar el token en una cookie
+                Cookies.set('token', access_token, { secure: true, sameSite: 'Strict' });
+
+                // Almacenar user y roles en cookies
+                Cookies.set('user', JSON.stringify(userData), { secure: true, sameSite: 'Strict' });
+                Cookies.set('roles', JSON.stringify(userData.roles), { secure: true, sameSite: 'Strict' });
+
+
+                const token = Cookies.get('token');
+                const user = JSON.parse(Cookies.get('user') || '{}'); // Parsear la cadena JSON a objeto
+                const roles = JSON.parse(Cookies.get('roles') || '[]'); // Parsear la cadena JSON a array
+                
+                console.log('Token:', token);
+                console.log('User ID:', user);
+       
+                console.log('User Roles:', roles);
+       
+                setUser(user);
+                setRoles(roles);
+                setToken(token);
+            } else {
+                // Manejar casos en que userData o roles no están definidos
+                setError(new Error('Datos de usuario inválidos'));
+                setToastInfo({
+                    status: 'error',
+                    title: 'Error',
+                    description: 'La estructura de los datos del usuario es inválida.'
+                });
+            }
+
             setToastInfo({
                 status: 'success',
                 title: 'Operación exitosa',
@@ -53,19 +84,24 @@ export const AuthProvider = ({ children }) => {
                 title: 'Error',
                 description: 'Ocurrió un error al realizar la operación.'
             });
-
-            
-    
         }
     };
 
     const logout = () => {
+        // Eliminar cookies y limpiar estado
+        Cookies.remove('token');
+        Cookies.remove('user');
+        Cookies.remove('roles');
         setUser(null);
+        setRoles([]);
+        setToken(null);
         goTo('/login');
     };
 
     const value = {
         user,
+        token,
+        roles,
         login,
         logout,
         loading,

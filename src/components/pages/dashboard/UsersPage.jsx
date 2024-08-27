@@ -1,23 +1,15 @@
-import React from 'react'
-import MainLayout from '../../layouts/MainLayout'
-import useFetchData from '../../../hooks/useFetchData';
-import PaginatedTable from '../../organisms/PaginatedTable';
-
-
+import React from 'react';
+import MainLayout from '../../layouts/MainLayout';
+import TableRoles from '../../organisms/tables/TableRoles';
 
 const UsersPage = () => {
 
-  const { data: usersData, loading } = useFetchData("/dynamic/Role");
 
-  // if (loading) return <p>Loading...</p>;
-
-  // console.log(usersData);
-  const columns = ["CODIGO", "NOMBRE", "CODIGO", "NOMBRE"];
   return (
     <MainLayout>
-      <PaginatedTable data={usersData} columns={columns} />
+      <TableRoles />
     </MainLayout>
-  )
+  );
 }
 
-export default UsersPage
+export default UsersPage;
