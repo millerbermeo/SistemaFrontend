@@ -1,33 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useModal } from '../../../context/ModalContext';
-import useUpdateRole from '../../../hooks/role_hooks/useUpdateRole';
-import ToastComponent from '../../organisms/ToastComponent';
+import { useModal } from '../../../../context/ModalContext';
+import useRegisterRole from '../../../../hooks/role_hooks/useRegisterRole';
+import ToastComponent from '../../../organisms/ToastComponent';
 import { Button, Input } from '@nextui-org/react';
-import { clearFormInputs } from '../../../utils/formUtils';
+import { clearFormInputs } from '../../../../utils/formUtils';
 
-const RolFormUpdate = ({ rol, fetchData }) => {
-    const { register, handleSubmit, setValue, formState: { errors }, watch } = useForm();
+const RolForm = ({ fetchData }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { closeModal } = useModal();
-    const { updateRole, toastInfo, loading, error } = useUpdateRole();
-
-    // Inicializa el valor del campo 'nombre' cuando el componente se monta
-    useEffect(() => {
-        if (rol) {
-            setValue('nombre', rol.nombre); // Ajusta según la estructura del objeto rol
-        }
-    }, [rol, setValue]);
+    const { registerRole, toastInfo, loading, error } = useRegisterRole();
 
     const onSubmit = async (data) => {
         const processedName = data.nombre.trim().toLowerCase().replace(/\s+/g, '');
 
         try {
-            await updateRole(rol.id, processedName); // Usa el ID del rol para la actualización
+            await registerRole(processedName);
             fetchData();
             clearFormInputs();
             closeModal();
         } catch (err) {
-            console.error('Error updating role:', err);
+            console.error('Error registering role:', err);
         }
     };
 
@@ -39,7 +32,7 @@ const RolFormUpdate = ({ rol, fetchData }) => {
                     clearable
                     variant="bordered"
                     label="Nombre"
-                    placeholder="Ingresa el nombre"
+                    placeholder="Ingresa tu nombre"
                     {...register('nombre', {
                         required: 'El nombre es requerido',
                         validate: {
@@ -49,10 +42,9 @@ const RolFormUpdate = ({ rol, fetchData }) => {
                     disabled={loading}
                     isInvalid={!!errors.nombre}
                     errorMessage={errors.nombre ? errors.nombre.message : ''}
-                    value={watch('nombre')} // Asegúrate de que el valor sea controlado
                 />
                 <Button type="submit" color="primary" className="mt-4" disabled={loading}>
-                    {loading ? 'Actualizando...' : 'Actualizar'}
+                    {loading ? 'Registrando...' : 'Registrar'}
                 </Button>
                 {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
             </form>
@@ -67,6 +59,6 @@ const RolFormUpdate = ({ rol, fetchData }) => {
             )}
         </>
     );
-};
+}
 
-export default RolFormUpdate;
+export default RolForm;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { useModal } from '../../../context/ModalContext';
-import useDeleteRole from '../../../hooks/role_hooks/useDeleteRole';
-import ToastComponent from '../../organisms/ToastComponent';
+import { useModal } from '../../../../context/ModalContext';
+import useDeleteRole from '../../../../hooks/role_hooks/useDeleteRole';
+import ToastComponent from '../../../organisms/ToastComponent';
 import { Button } from '@nextui-org/react';
 
 const RolFormDelete = ({ rol, fetchData }) => {

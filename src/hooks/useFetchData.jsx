@@ -8,6 +8,8 @@ const useFetchData = (endpoint) => {
     try {
       const response = await axiosClient.get(endpoint);
       setData(response.data);
+
+      console.log(`Data fetched from ${endpoint}:`, response.data);
     } catch (error) {
       console.error(`Error fetching data from ${endpoint}:`, error);
     }

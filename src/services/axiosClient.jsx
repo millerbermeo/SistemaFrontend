@@ -10,7 +10,7 @@ axiosClient.interceptors.request.use((config) => {
     // Token estático
 
     const token = Cookies.get('token');
-    const staticToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MjQ3NDY3MDUsImV4cCI6MTcyNDc1MDMwNSwibmJmIjoxNzI0NzQ2NzA1LCJqdGkiOiJYaWFqbjB5MW9KVGJBVmFIIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.XufwIKg037tR8lm83ZUdQ7akCDXp26nCh0vHBYGEKnM";
+    const staticToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MjQ3ODc5NTMsImV4cCI6MTcyNDc5MTU1MywibmJmIjoxNzI0Nzg3OTUzLCJqdGkiOiJ4ZVRlMTQ3M2xTTzBsd1U3Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.A-tMIpbdpft4DYqDBr3XNBq6GM_1cWvA86_y94lYMxY";
     
     // if (token) {
     //     config.headers.Authorization = `Bearer ${token}`;

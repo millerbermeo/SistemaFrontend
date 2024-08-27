@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import useFetchData from '../../../hooks/useFetchData';
 import PaginatedTable from '../PaginatedTable';
-import RolForm from '../../molecules/forms/RolForm';
+import RolForm from '../../molecules/forms/roles/RolForm';
 import { useModal } from '../../../context/ModalContext';
 import { Button } from '@nextui-org/react';
-import RolFormUpdate from '../../molecules/forms/RolFormUpdate';
-import RolFormDelete from '../../molecules/forms/RolFormDelete';
+import RolFormUpdate from '../../molecules/forms/roles/RolFormUpdate';
+import RolFormDelete from '../../molecules/forms/roles/RolFormDelete';
 
 
 const TableRoles = () => {
