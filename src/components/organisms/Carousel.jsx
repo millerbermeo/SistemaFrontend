@@ -30,22 +30,22 @@ const Carousel = ({ images }) => {
           className="flex w-full transition-transform duration-700 h-full ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {fondos.map((fondo, index) => (
+          {/* {fondos.map((fondo, index) => (
             <div
               key={index}
               className="w-full h-full flex-shrink-0"
               style={{ backgroundColor: fondo }}
             ></div>
-          ))}
+          ))} */}
 
-          {/* {images.map((image, index) => (
+          {images.map((image, index) => (
             <img
               key={index}
               src={image}
               alt={`Slide ${index}`}
-              className="w-full h-full object-contain flex-shrink-0"
+              className="w-full h-full object-fill flex-shrink-0"
             />
-          ))} */}
+          ))} 
 
         </div>
       </div>

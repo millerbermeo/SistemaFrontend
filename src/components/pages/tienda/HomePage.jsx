@@ -14,9 +14,9 @@ import { ButtonOne } from '../../atoms/buttons/ButtonOne';
 const HomePage = () => {
 
   const images = [
-    'leonardo5.jpg',
-    'leonardo7.jpg',
-    'leonardo3.jpg',
+    'uno.jpg',
+    'dos.jpg',
+    'tres.jpg',
   ];
 
   const CardImg = [
